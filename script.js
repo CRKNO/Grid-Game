@@ -1,68 +1,72 @@
 const position = document.querySelectorAll(".background");
 const gameArea = document.querySelector("main");
 const scoreSpan = document.querySelector(".score");
+const gameContainer = document.querySelector(".game")
 
 let playerPosition = 0;
 let scorePosition= -1;
 let newScore = true;
 let score = 0;
 
+let tableSize = 5;
+let slots = [];
+
 document.addEventListener("keydown", hearKeyboard);
 
 function hearKeyboard(e){
     console.log(e.key);
-    movement(e.key);
+    movement(e.key, slots, tableSize);
     updateScore(scorePosition, playerPosition);
     print();
 }
 
-function movement(key){
+function movement(key, arr, tbSize){
 
     switch(key){
         /* Up */
         case "w": 
-            if(playerPosition >= 3){
-                playerPosition -= 3;
+            if(playerPosition >= tbSize){
+                playerPosition -= tbSize;
             }
             break;
         case "ArrowUp": 
-            if(playerPosition >= 3){
-                playerPosition -= 3;
+            if(playerPosition >= tbSize){
+                playerPosition -= tbSize;
             }
             break;
 
             /* Down */
         case "s": 
-            if(playerPosition <= 5){
-                playerPosition += 3;
+            if(playerPosition <= (arr.length - tbSize -1)){
+                playerPosition += tbSize;
             }
             break;
         case "ArrowDown": 
-            if(playerPosition <= 5){
-                playerPosition += 3;
+            if(playerPosition <= (arr.length - tbSize -1)){
+                playerPosition += tbSize;
             }
             break;
 
             /* Left */
         case "a":
-            if(playerPosition >=1){
+            if(playerPosition >= 1){
                 playerPosition--;
             }
             break;
         case "ArrowLeft":
-            if(playerPosition >=1){
+            if(playerPosition >= 1){
                 playerPosition--;
             }
             break;
 
             /* Right */
         case "d":
-            if(playerPosition <=7){
+            if(playerPosition <= (arr.length -2)){
                 playerPosition++;
             }
             break;
         case "ArrowRight":
-            if(playerPosition <=7){
+            if(playerPosition <= (arr.length -2)){
                 playerPosition++;
             }
             break;
@@ -70,18 +74,19 @@ function movement(key){
 }
 
 function print(){
-    for(p of position){
+    for(p of slots){
         p.classList.remove("player-color");
         p.classList.remove("score-color");
     }
-    position[scorePosition].classList.add("score-color");
-    position[playerPosition].classList.add("player-color");
+    slots[scorePosition].classList.add("score-color");
+    slots[playerPosition].classList.add("player-color");
 }
 
 function scoreGenerator(arr){
-    let randomNumber = randomNum(0, arr.length -1);
-    console.log("random: " + randomNumber)
-    scorePosition = randomNumber;
+    do{
+        let randomNumber = randomNum(0, arr.length -1);
+        scorePosition = randomNumber;
+    }while(scorePosition == playerPosition);
 }
 
 function randomNum(min, max){
@@ -96,11 +101,27 @@ function updateScore(a, b){
     }
 
     if(newScore){
-        scoreGenerator(position);
+        scoreGenerator(slots);
         newScore = false;
     }
 }
 
+function prepareTable(size){
+    let tableGrid = size*size;
+    // document.createElement("div")
+    
+    for(let i = 0; i < (size*size); i++){
+        slots.push(document.createElement("div"));
+        slots[i].classList.add("background");
+        gameContainer.appendChild(slots[i]);
+        console.log("hecho");
+    }
+
+    slots[0].classList.add("player-color");
+
+    gameContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    gameContainer.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+}
 /* MEJORAS */
 
 //1) Poder elejir el tamaño de la cuadricula.

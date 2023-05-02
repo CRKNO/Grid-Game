@@ -39,9 +39,8 @@ h2, h1{
 .game{
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    width: 348px;
+    /* grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr); */
 }
 .background{
     width: 100px;
