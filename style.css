@@ -33,15 +33,75 @@ main{
 h2, h1{
     text-align: center;
 
-    
     color: var(--white);
 }
-.game{
+.menu{
+
+    width: 40rem;
+    height: 10rem;
+    border-radius: .7rem;
+
+    background-color: rgb(232, 132, 24);
+}
+.menu form{
+    display: grid;
+    grid-template-rows: 1.5fr 2fr 1fr;
+
+    height: 100%;
+
+}
+.menu form h2{
+    align-self: center;
+
+    font-size: 1.7rem;
+}
+.menu form div{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    place-content: center;
+    gap: .7rem;
+
+    align-items: center;
+    justify-items: center;
+}
+label{
+    width: 80%;
+
+    padding-block: .2rem;
+    border-radius: .4rem;
+
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+
+    background-color: #444444;
+}
+label:hover{
+    font-size: 2rem;
+    background-color: #363636;
+    margin-bottom: 0;
+}
+.menu form button{
+    border-end-end-radius: .7rem;
+    border-end-start-radius: .7rem;
+    border:none;
+
+    font-size: 1.5rem;
+
+    background-color:#363636;
+    color:var(--white);
+}
+.menu form button:hover{
+    background-color: #444444;
+}
+.menu form button:disabled{
+    background-color: #b3b3b3;
+}
+.game-table{
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    width: 348px;
+    /* grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr); */
 }
 .background{
     width: 100px;
@@ -57,4 +117,8 @@ h2, h1{
 }
 .score-color{
     background-color: var(--score);
+}
+
+.inactive{
+    display: none;
 }
