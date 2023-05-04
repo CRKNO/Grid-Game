@@ -1,7 +1,11 @@
 const position = document.querySelectorAll(".background");
 const gameArea = document.querySelector("main");
 const scoreSpan = document.querySelector(".score");
-const gameContainer = document.querySelector(".game")
+const gameContainer = document.querySelector(".game-table");
+const gameSection = document.querySelector(".game");
+const menuForm = document.querySelector("form");
+const gameMenu = document.querySelector(".menu")
+const formButton = document.querySelector(".start-button")
 
 let playerPosition = 0;
 let scorePosition= -1;
@@ -11,7 +15,31 @@ let score = 0;
 let tableSize = 5;
 let slots = [];
 
-document.addEventListener("keydown", hearKeyboard);
+
+menuForm.addEventListener("input", inputSelected);
+menuForm.addEventListener("submit", startGame);
+
+function inputSelected(event){
+    formButton.removeAttribute("disabled");
+}
+function startGame(event){
+    let options = event.target.elements.namedItem("size-radio");
+    
+    event.preventDefault();
+    
+    for(radio of options){
+        if(radio.checked){
+            tableSize = Number(radio.value);
+        }
+    }
+    
+    document.addEventListener("keydown", hearKeyboard);
+    gameMenu.classList.add("inactive");
+
+    gameSection.classList.remove("inactive");
+
+    prepareTable(tableSize);
+}
 
 function hearKeyboard(e){
     console.log(e.key);
@@ -37,12 +65,12 @@ function movement(key, arr, tbSize){
 
             /* Down */
         case "s": 
-            if(playerPosition <= (arr.length - tbSize -1)){
+            if(playerPosition <= (arr.length - tbSize)){
                 playerPosition += tbSize;
             }
             break;
         case "ArrowDown": 
-            if(playerPosition <= (arr.length - tbSize -1)){
+            if(playerPosition <= (arr.length - tbSize)){
                 playerPosition += tbSize;
             }
             break;
@@ -71,6 +99,7 @@ function movement(key, arr, tbSize){
             }
             break;
     }
+    console.log(playerPosition);
 }
 
 function print(){

@@ -13,20 +13,37 @@
         <h1 class="title">Grid Game</h1>
     </header>
     <main>
-        <h2>Score: <span class="score">0</span></h2>
-        <div class="game">
 
-            <!-- <div class="background "></div>
-            <div class="background "></div>
-            <div class="background "></div>
-            <div class="background "></div>
-            <div class="background "></div>
-            <div class="background "></div>
-            <div class="background "></div>
-            <div class="background "></div>
-            <div class="background "></div> -->
+        <div class="menu">
+            <form>
+
+                <h2>Choose a Grid Size</h2>
+
+                <div>
+                    <label for="size-1">3</label>
+                    <input hidden type="radio" name="size-radio" id="size-1" value="3">
     
-        
+                    <label for="size-2">4</label>
+                    <input hidden type="radio" name="size-radio" id="size-2" value="4">
+    
+                    <label for="size-3">5</label>
+                    <input hidden type="radio" name="size-radio" id="size-3" value="5">
+    
+                    <label for="size-4">6</label>
+                    <input hidden type="radio" name="size-radio" id="size-4" value="6">
+    
+                    <label for="size-5">7</label>
+                    <input hidden type="radio" name="size-radio" id="size-5" value="7">
+
+                </div>
+                
+                <button class="start-button" disabled>Start Game</button>
+            </form>
+        </div>
+        <div class="game inactive">
+            <h2>Score: <span class="score">0</span></h2>
+            <div class="game-table">
+            </div>
         </div>
 
     </main>
